@@ -56,10 +56,19 @@ const App = () => {
       </InputWithLabel>
 
       <hr />
+      <TextParagraph>
+        <strong>Book Results:</strong>
+      </TextParagraph>
       <List list={searchedStories} />
     </div>
   );
 };
+
+const TextParagraph = ({ children }) => (
+  <>
+    <p>{children}</p>
+  </>
+);
 
 const InputWithLabel = ({
   id,
