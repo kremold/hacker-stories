@@ -3,6 +3,7 @@ import axios from "axios";
 import styles from "./App.module.css";
 import cs from "classnames";
 import styled from "styled-components";
+import { ReactComponent as Check } from "./check.svg";
 
 const StyledContainer = styled.div`
   height: 100vw;
@@ -48,6 +49,11 @@ const StyledButton = styled.button`
   &:hover {
     background: #171212;
     color: #ffffff;
+  }
+
+  &:hover > svg > g {
+    fill: #ffffff;
+    stroke: #ffffff;
   }
 `;
 
@@ -105,7 +111,7 @@ const storiesReducer = (state, action) => {
     case "REMOVE_STORY":
       return {
         ...state,
-        data: state.filter(
+        data: state.data.filter(
           (story) => action.payload.objectID !== story.objectID
         ),
       };
@@ -157,7 +163,7 @@ const App = () => {
   }, [handleFetchStories]);
 
   const handleRemoveStory = (item) => {
-    dispatchStories({ type: "REMOVE_STORIES", payload: item });
+    dispatchStories({ type: "REMOVE_STORY", payload: item });
   };
 
   const handleSearchInput = (event) => {
@@ -261,7 +267,7 @@ const Item = ({ item, onRemoveItem }) => (
     <StyledColumn width="10%"> {item.points}</StyledColumn>
     <StyledColumn width="10%">
       <StyledButtonSmall type="button" onClick={() => onRemoveItem(item)}>
-        Dismiss
+        <Check height="18px" width="18px" />
       </StyledButtonSmall>
     </StyledColumn>
   </StyledItem>
