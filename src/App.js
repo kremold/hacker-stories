@@ -4,9 +4,15 @@ import styles from "./App.module.css";
 import cs from "classnames";
 import styled from "styled-components";
 import { ReactComponent as Check } from "./check.svg";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { faCheckSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+library.add(fab, faCheckSquare);
 
 const StyledContainer = styled.div`
-  height: 100vw;
+  height: 100%;
   padding: 20px;
   background: #83a4d4;
   background: linear-gradient(to left, #b6fbff, #83a4d4);
@@ -267,7 +273,8 @@ const Item = ({ item, onRemoveItem }) => (
     <StyledColumn width="10%"> {item.points}</StyledColumn>
     <StyledColumn width="10%">
       <StyledButtonSmall type="button" onClick={() => onRemoveItem(item)}>
-        <Check height="18px" width="18px" />
+        <FontAwesomeIcon icon="check-square" size="1x" />
+        {/* <Check height="18px" width="18px" /> */}
       </StyledButtonSmall>
     </StyledColumn>
   </StyledItem>
