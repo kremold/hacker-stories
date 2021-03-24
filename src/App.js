@@ -6,11 +6,12 @@ import styled from "styled-components";
 import { ReactComponent as Check } from "./check.svg";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-import { faCheckSquare } from "@fortawesome/free-solid-svg-icons";
+import { faCheckSquare, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-library.add(fab, faCheckSquare);
+library.add(fab, faCheckSquare, faSearch);
 
+//#region styles
 const StyledContainer = styled.div`
   height: 100%;
   padding: 20px;
@@ -90,6 +91,7 @@ const StyledInput = styled.input`
   background-color: transparent;
   font-size: 24px;
 `;
+//#endregion
 
 const API_ENDPOINT = "https://hn.algolia.com/api/v1/search?query=";
 
@@ -145,6 +147,12 @@ const useSemiPersistentState = (key, initialState) => {
   return [value, setValue];
 };
 
+const getSumComments = (stories) => {
+  console.log("C");
+
+  return stories.data.reduce((result, value) => result + value.num_comments, 0);
+};
+
 const App = () => {
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
 
@@ -156,6 +164,7 @@ const App = () => {
     isError: false,
   });
 
+  //#region handlers
   const handleFetchStories = React.useCallback(async () => {
     dispatchStories({ type: "STORIES_FETCH_INIT" });
     try {
@@ -170,10 +179,6 @@ const App = () => {
     }
   }, [url]);
 
-  React.useEffect(() => {
-    handleFetchStories();
-  }, [handleFetchStories]);
-
   const handleRemoveStory = React.useCallback((item) => {
     dispatchStories({ type: "REMOVE_STORY", payload: item });
   }, []);
@@ -186,10 +191,20 @@ const App = () => {
     setUrl(`${API_ENDPOINT}${searchTerm}`);
     event.preventDefault();
   };
+  //#endregion
 
+  React.useEffect(() => {
+    handleFetchStories();
+  }, [handleFetchStories]);
+
+  const sumComments = React.useMemo(() => getSumComments(stories), [stories]);
+
+  //#region render
   return (
     <StyledContainer>
-      <StyledHeadlinePrimary>My Hacker Stories</StyledHeadlinePrimary>
+      <StyledHeadlinePrimary>
+        My Hacker Stories with {sumComments} comments.
+      </StyledHeadlinePrimary>
 
       <SearchForm
         searchTerm={searchTerm}
@@ -210,7 +225,10 @@ const App = () => {
       )}
     </StyledContainer>
   );
+  //#endregion
 };
+
+// #region Components
 const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit }) => (
   <StyledSearchFrom onSubmit={onSearchSubmit}>
     <InputWithLabel
@@ -222,7 +240,7 @@ const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit }) => (
       <strong>Search:</strong>
     </InputWithLabel>
     <StyledButtonLarge type="button" disabled={!searchTerm}>
-      Submit
+      <FontAwesomeIcon icon="search" size="1x" />
     </StyledButtonLarge>
   </StyledSearchFrom>
 );
@@ -286,5 +304,6 @@ const Item = ({ item, onRemoveItem }) => (
     </StyledColumn>
   </StyledItem>
 );
+//#endregion
 
 export default App;
