@@ -14,8 +14,8 @@ library.add(fab, faCheckSquare);
 const StyledContainer = styled.div`
   height: 100%;
   padding: 20px;
-  background: #83a4d4;
-  background: linear-gradient(to left, #b6fbff, #83a4d4);
+  background: limegreen;
+  background: linear-gradient(to left, #b6fbff, limegreen);
   color: #171212;
 `;
 
@@ -127,13 +127,19 @@ const storiesReducer = (state, action) => {
 };
 
 const useSemiPersistentState = (key, initialState) => {
+  const isMounted = React.useRef(false);
+
   // use the key so that 'value' in local storage isn't overwritten
   const [value, setValue] = React.useState(
     localStorage.getItem(key) || initialState
   );
 
   React.useEffect(() => {
-    localStorage.setItem(key, value);
+    if (!isMounted.current) {
+      isMounted.current = true;
+    } else {
+      localStorage.setItem(key, value);
+    }
   }, [value, key]);
 
   return [value, setValue];
