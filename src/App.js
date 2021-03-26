@@ -129,29 +129,24 @@ const storiesReducer = (state, action) => {
 };
 
 const useSemiPersistentState = (key, initialState) => {
-  const isMounted = React.useRef(false);
-
   // use the key so that 'value' in local storage isn't overwritten
   const [value, setValue] = React.useState(
     localStorage.getItem(key) || initialState
   );
 
   React.useEffect(() => {
-    if (!isMounted.current) {
-      isMounted.current = true;
-    } else {
-      localStorage.setItem(key, value);
-    }
+    localStorage.setItem(key, value);
   }, [value, key]);
 
   return [value, setValue];
 };
 
-const getSumComments = (stories) => {
-  console.log("C");
+// for adding number of comments to page
+// const getSumComments = (stories) => {
+//   console.log("C");
 
-  return stories.data.reduce((result, value) => result + value.num_comments, 0);
-};
+//   return stories.data.reduce((result, value) => result + value.num_comments, 0);
+// };
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
@@ -179,9 +174,9 @@ const App = () => {
     }
   }, [url]);
 
-  const handleRemoveStory = React.useCallback((item) => {
+  const handleRemoveStory = (item) => {
     dispatchStories({ type: "REMOVE_STORY", payload: item });
-  }, []);
+  };
 
   const handleSearchInput = (event) => {
     setSearchTerm(event.target.value);
@@ -197,14 +192,12 @@ const App = () => {
     handleFetchStories();
   }, [handleFetchStories]);
 
-  const sumComments = React.useMemo(() => getSumComments(stories), [stories]);
+  // const sumComments = React.useMemo(() => getSumComments(stories), [stories]);
 
   //#region render
   return (
     <StyledContainer>
-      <StyledHeadlinePrimary>
-        My Hacker Stories with {sumComments} comments.
-      </StyledHeadlinePrimary>
+      <StyledHeadlinePrimary>My Hacker Stories.</StyledHeadlinePrimary>
 
       <SearchForm
         searchTerm={searchTerm}
@@ -282,11 +275,10 @@ const InputWithLabel = ({
   );
 };
 
-const List = React.memo(({ list, onRemoveItem }) =>
+const List = ({ list, onRemoveItem }) =>
   list.map((item) => (
     <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem} />
-  ))
-);
+  ));
 
 const Item = ({ item, onRemoveItem }) => (
   <StyledItem>
