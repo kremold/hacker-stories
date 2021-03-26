@@ -380,3 +380,5 @@ const Item = ({ item, onRemoveItem }: ItemProps) => (
 //#endregion
 
 export default App;
+
+export { storiesReducer, SearchForm, InputWithLabel, List, Item };
