@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import React from "react";
 import App, {
   storiesReducer,
@@ -76,6 +76,24 @@ describe("storiesReducer", () => {
       isError: true,
     };
     expect(newState).toStrictEqual(expectedState);
+  });
+});
+
+describe("Item", () => {
+  test("renders all properties", () => {
+    render(<Item item={storyOne} />);
+
+    //screen.debug();
+
+    expect(screen.getByText("Jordan Walke")).toBeInTheDocument();
+    expect(screen.getByText("React")).toHaveAttribute(
+      "href",
+      "https://reactjs.org/"
+    );
+  });
+  test("renders a clickable dismiss button", () => {
+    render(<Item item={storyOne} />);
+    expect(screen.getByRole("button")).toBeInTheDocument();
   });
 });
 
