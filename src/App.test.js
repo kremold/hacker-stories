@@ -7,7 +7,9 @@ import App, {
   SearchForm,
   InputWithLabel,
 } from "./App";
+import axios from "axios";
 
+//#region Mock Data
 const storyOne = {
   title: "React",
   url: "https://reactjs.org/",
@@ -27,6 +29,10 @@ const storyTwo = {
 };
 
 const stories = [storyOne, storyTwo];
+
+jest.mock("axios");
+
+//#endregion
 
 describe("storiesReducer", () => {
   test("remove a story from all stories", () => {
@@ -137,6 +143,28 @@ describe("SearchForm", () => {
     render(<SearchForm {...searchFormProps} />);
     fireEvent.submit(screen.getByRole("button"));
     expect(searchFormProps.onSearchSubmit).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("App", () => {
+  test("succeeds fetching data", async () => {
+    const promise = Promise.resolve({
+      data: {
+        hits: stories,
+      },
+    });
+    axios.get.mockImplementationOnce(() => promise);
+    render(<App />);
+    expect(screen.queryByText(/Loading/)).toBeInTheDocument();
+    //screen.debug();
+    await act(() => promise);
+    //screen.debug();
+    expect(screen.queryByText(/Loading/)).toBeNull();
+
+    expect(screen.queryByText("React")).toBeInTheDocument();
+    expect(screen.queryByText("Redux")).toBeInTheDocument();
+    //change to be checkmark by fontawesome
+    //expect(screen.getAllByText("Dismiss").length).toBe(2);
   });
 });
 
