@@ -30,7 +30,7 @@ exports[`App renders snapshot 1`] = `
     />
     <button
       class="sc-bdfBwQ sc-eCssSg kQtNhM fTEYT"
-      type="button"
+      type="submit"
     >
       <svg
         aria-hidden="true"
@@ -257,7 +257,7 @@ exports[`SearchForm renders snapshot 1`] = `
   />
   <button
     class="sc-bdfBwQ sc-eCssSg kQtNhM fTEYT"
-    type="button"
+    type="submit"
   >
     <svg
       aria-hidden="true"
