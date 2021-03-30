@@ -44,7 +44,7 @@ export const SearchForm = ({
     >
       <strong>Search:</strong>
     </InputWithLabel>
-    <StyledButtonLarge type="button" disabled={!searchTerm}>
+    <StyledButtonLarge type="submit" disabled={!searchTerm}>
       <FontAwesomeIcon icon="search" size="1x" />
     </StyledButtonLarge>
   </StyledSearchFrom>
