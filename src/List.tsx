@@ -1,4 +1,6 @@
+import React from "react";
 import styled from "styled-components";
+import { sortBy } from "lodash";
 import { StyledButton } from "./StyledButton";
 import { Story, Stories } from "./StoryTypes";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -44,17 +46,62 @@ type ListProps = {
   list: Stories;
   onRemoveItem: (item: Story) => void;
 };
+
+interface Sort {
+  [key: string]: (list: Stories) => Stories;
+}
 //#endregion
 
+const SORTS: Sort = {
+  NONE: (list: Stories) => list,
+  TITLE: (list: Stories) => sortBy(list, "title"),
+  AUTHOR: (list: Stories) => sortBy(list, "author"),
+  COMMENT: (list: Stories) => sortBy(list, "num_comments").reverse(),
+  POINT: (list: Stories) => sortBy(list, "points").reverse(),
+};
+
 //#region components
-export const List = ({ list, onRemoveItem }: ListProps) => (
-  <>
-    {list.map((item) => (
-      <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem} />
-    ))}
-    ;
-  </>
-);
+export const List = ({ list, onRemoveItem }: ListProps) => {
+  const [sort, setSort] = React.useState("NONE");
+  const handleSort = (sortKey: string) => {
+    setSort(sortKey);
+  };
+
+  const sortFunction = SORTS[sort];
+  const sortedList = sortFunction(list);
+
+  return (
+    <div>
+      <StyledItem style={{ fontWeight: "bold" }}>
+        <StyledColumn width="40%">
+          <button type="button" onClick={() => handleSort("TITLE")}>
+            Title:
+          </button>
+        </StyledColumn>
+        <StyledColumn width="30%">
+          <button type="button" onClick={() => handleSort("AUTHOR")}>
+            Author:
+          </button>
+        </StyledColumn>
+        <StyledColumn width="10%">
+          <button type="button" onClick={() => handleSort("COMMENT")}>
+            Comments Count:
+          </button>
+        </StyledColumn>
+        <StyledColumn width="10%">
+          <button type="button" onClick={() => handleSort("POINT")}>
+            Points:
+          </button>
+        </StyledColumn>
+        <StyledColumn width="10%">Remove:</StyledColumn>
+      </StyledItem>
+      {sortedList.map((item) => (
+        <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem} />
+      ))}
+      ;
+    </div>
+  );
+};
 
 export const Item = ({ item, onRemoveItem }: ItemProps) => (
   <StyledItem>
