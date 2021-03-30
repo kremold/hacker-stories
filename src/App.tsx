@@ -343,6 +343,7 @@ const InputWithLabel = ({
       &nbsp;
       <StyledInput
         id={id}
+        data-testId="submit"
         type={type}
         value={value}
         autoFocus={isFocused}
@@ -370,7 +371,11 @@ const Item = ({ item, onRemoveItem }: ItemProps) => (
     <StyledColumn width="10%">{item.num_comments}</StyledColumn>
     <StyledColumn width="10%">{item.points}</StyledColumn>
     <StyledColumn width="10%">
-      <StyledButtonSmall type="button" onClick={() => onRemoveItem(item)}>
+      <StyledButtonSmall
+        data-testid="dismiss-button"
+        type="button"
+        onClick={() => onRemoveItem(item)}
+      >
         <FontAwesomeIcon icon="check-square" size="1x" />
         {/* <Check height="18px" width="18px" /> */}
       </StyledButtonSmall>
