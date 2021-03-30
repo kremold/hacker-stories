@@ -108,6 +108,11 @@ describe("Item", () => {
     fireEvent.click(screen.getByRole("button"));
     expect(handleRemoveItem).toHaveBeenCalledTimes(1);
   });
+
+  test("renders snapshot", () => {
+    const { container } = render(<Item item={storyOne} />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
 });
 
 describe("SearchForm", () => {
@@ -143,6 +148,11 @@ describe("SearchForm", () => {
     render(<SearchForm {...searchFormProps} />);
     fireEvent.submit(screen.getByRole("button"));
     expect(searchFormProps.onSearchSubmit).toHaveBeenCalledTimes(1);
+  });
+
+  test("renders snapshot", () => {
+    const { container } = render(<SearchForm {...searchFormProps} />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
 
@@ -267,6 +277,18 @@ describe("App", () => {
     expect(screen.queryByText("Dan Abramov, Andrew Clark")).toBeNull();
     expect(screen.queryByText("Brendan Eich")).toBeInTheDocument();
   });
+
+  test("renders snapshot", async () => {
+    const promise = Promise.resolve({
+      data: {
+        hits: stories,
+      },
+    });
+    axios.get.mockImplementationOnce(() => promise);
+    const { container } = render(<App />);
+    await act(() => promise);
+    expect(container.firstChild).toMatchSnapshot();
+  });
 });
 
 describe("something truthy and falsy", () => {
@@ -276,10 +298,4 @@ describe("something truthy and falsy", () => {
   it("false to be false", () => {
     expect(false).toBe(false);
   });
-});
-
-describe("App component", () => {
-  test("remove an item when clicking the Dismiss button", () => {});
-
-  test("requests some initial stories from an API", () => {});
 });

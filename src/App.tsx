@@ -343,7 +343,7 @@ const InputWithLabel = ({
       &nbsp;
       <StyledInput
         id={id}
-        data-testId="submit"
+        data-testid="submit"
         type={type}
         value={value}
         autoFocus={isFocused}
