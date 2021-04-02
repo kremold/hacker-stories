@@ -5,10 +5,14 @@ import { StyledButton } from "./StyledButton";
 import { Story, Stories } from "./StoryTypes";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-import { faCheckSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheckSquare,
+  faSortAmountDown,
+  faSortAmountUp,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-library.add(fab, faCheckSquare);
+library.add(fab, faCheckSquare, faSortAmountDown, faSortAmountUp);
 
 //#region Styles
 const StyledButtonSmall = styled(StyledButton)`
@@ -33,6 +37,28 @@ const StyledColumn = styled.span<{ width: string }>`
   }
 
   width: ${(props) => props.width};
+`;
+
+const SortButton = styled.button`
+  cursor: pointer;
+  font-family: "Wallpoet", cursive;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background: #a741a7;
+  }
+  &.ascending::after {
+    content: "🔼";
+    display: inline-block;
+  }
+  &.descending::after {
+    content: "🔽";
+    display: inline-block;
+  }
 `;
 //#endregion
 
@@ -62,36 +88,62 @@ const SORTS: Sort = {
 
 //#region components
 export const List = ({ list, onRemoveItem }: ListProps) => {
-  const [sort, setSort] = React.useState("NONE");
-  const handleSort = (sortKey: string) => {
-    setSort(sortKey);
+  const [sort, setSort] = React.useState({ sortKey: "NONE", isReverse: false });
+  const handleSort = (sortkey: string) => {
+    const isReverse = sort.sortKey === sortkey && !sort.isReverse;
+    setSort({ sortKey: sortkey, isReverse: isReverse });
   };
 
-  const sortFunction = SORTS[sort];
-  const sortedList = sortFunction(list);
+  const sortFunction = SORTS[sort.sortKey];
+  const sortedList = sort.isReverse
+    ? sortFunction(list).reverse()
+    : sortFunction(list);
+  //console.log(sort.sortKey);
+  const getClassName =
+    sort.sortKey !== "NONE" && sort.isReverse
+      ? "ascending"
+      : sort.sortKey !== "NONE" && !sort.isReverse
+      ? "descending"
+      : "";
 
   return (
     <div>
       <StyledItem style={{ fontWeight: "bold" }}>
         <StyledColumn width="40%">
-          <button type="button" onClick={() => handleSort("TITLE")}>
+          <SortButton
+            type="button"
+            className={sort.sortKey === "TITLE" ? getClassName : ""}
+            onClick={() => handleSort("TITLE")}
+          >
             Title:
-          </button>
+          </SortButton>
         </StyledColumn>
         <StyledColumn width="30%">
-          <button type="button" onClick={() => handleSort("AUTHOR")}>
+          <SortButton
+            type="button"
+            className={sort.sortKey === "AUTHOR" ? getClassName : ""}
+            onClick={() => handleSort("AUTHOR")}
+          >
             Author:
-          </button>
+          </SortButton>
         </StyledColumn>
         <StyledColumn width="10%">
-          <button type="button" onClick={() => handleSort("COMMENT")}>
-            Comments Count:
-          </button>
+          <SortButton
+            type="button"
+            className={sort.sortKey === "COMMENT" ? getClassName : ""}
+            onClick={() => handleSort("COMMENT")}
+          >
+            Comments:
+          </SortButton>
         </StyledColumn>
         <StyledColumn width="10%">
-          <button type="button" onClick={() => handleSort("POINT")}>
+          <SortButton
+            type="button"
+            className={sort.sortKey === "POINT" ? getClassName : ""}
+            onClick={() => handleSort("POINT")}
+          >
             Points:
-          </button>
+          </SortButton>
         </StyledColumn>
         <StyledColumn width="10%">Remove:</StyledColumn>
       </StyledItem>

@@ -15,6 +15,7 @@ const StyledContainer = styled.div`
   background: limegreen;
   background: linear-gradient(to left, #b6fbff, limegreen);
   color: #171212;
+  font-family: "Wallpoet", cursive;
 `;
 
 const StyledHeadlinePrimary = styled.h1`
