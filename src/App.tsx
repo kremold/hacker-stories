@@ -81,13 +81,54 @@ const useSemiPersistentState = (
 
   return [value, setValue];
 };
+
+const extractSearchTerm = (url: string) => url.replace(API_ENDPOINT, "");
+
+const getLastSearches = (urls: string[]) =>
+  urls
+    .reduce((result: string[], url, index) => {
+      const searchTerm: string = extractSearchTerm(url);
+      if (index === 0) {
+        return result.concat(searchTerm);
+      }
+      const previousSearchTerm = result[result.length - 1];
+      if (searchTerm === previousSearchTerm) {
+        return result;
+      } else {
+        return result.concat(searchTerm);
+      }
+    }, [])
+    .slice(-6)
+    .slice(0, -1)
+    .map(extractSearchTerm);
+
+const getUrl = (searchTerm: string) => `${API_ENDPOINT}${searchTerm}`;
 //#endregion
+
+type LastSearchProps = {
+  lastSearches: string[];
+  onLastSearch: (searchTerm: string) => void;
+};
+const LastSearch = ({ lastSearches, onLastSearch }: LastSearchProps) => (
+  <>
+    Recent Searches:
+    {lastSearches.map((searchTerm, index) => (
+      <button
+        key={searchTerm + index}
+        type="button"
+        onClick={() => onLastSearch(searchTerm)}
+      >
+        {searchTerm}
+      </button>
+    ))}
+  </>
+);
 
 const App = () => {
   //#region initializers
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
 
-  const [url, setUrl] = React.useState(`${API_ENDPOINT}${searchTerm}`);
+  const [urls, setUrls] = React.useState([getUrl(searchTerm)]);
 
   const [stories, dispatchStories] = React.useReducer(storiesReducer, {
     data: [],
@@ -100,7 +141,8 @@ const App = () => {
   const handleFetchStories = React.useCallback(async () => {
     dispatchStories({ type: "STORIES_FETCH_INIT" });
     try {
-      const result = await axios.get(url);
+      const lastUrl = urls[urls.length - 1];
+      const result = await axios.get(lastUrl);
 
       dispatchStories({
         type: "STORIES_FETCH_SUCCESS",
@@ -109,7 +151,7 @@ const App = () => {
     } catch {
       dispatchStories({ type: "STORIES_FETCH_FAILURE" });
     }
-  }, [url]);
+  }, [urls]);
 
   const handleRemoveStory = (item: Story) => {
     dispatchStories({ type: "REMOVE_STORY", payload: item });
@@ -120,9 +162,19 @@ const App = () => {
   };
 
   const handleSearchSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
-    setUrl(`${API_ENDPOINT}${searchTerm}`);
+    handleSearch(searchTerm);
     event.preventDefault();
   };
+  const handleSearch = (searchTerm: string) => {
+    const url = getUrl(searchTerm);
+    setUrls(urls.concat(url));
+  };
+
+  const handleLastSearch = (searchTerm: string) => {
+    setSearchTerm(searchTerm);
+    handleSearch(searchTerm);
+  };
+  const lastSearches = getLastSearches(urls);
   //#endregion
 
   //#region useEffect
@@ -141,6 +193,8 @@ const App = () => {
         onSearchInput={handleSearchInput}
         onSearchSubmit={handleSearchSubmit}
       />
+
+      <LastSearch lastSearches={lastSearches} onLastSearch={handleLastSearch} />
 
       <TextParagraph>
         <strong>Search Results:</strong>

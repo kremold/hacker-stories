@@ -49,6 +49,7 @@ exports[`App renders snapshot 1`] = `
       </svg>
     </button>
   </form>
+  Recent Searches:
   <p>
     <strong>
       Search Results:
