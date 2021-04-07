@@ -7,12 +7,16 @@ export type Story = {
   points: number;
 };
 
-export type Stories = Array<Story>;
+export type Stories = {
+  list: Array<Story>;
+  page: number;
+};
 
 export type StoriesState = {
-  data: Stories;
+  data: Array<Story>;
   isLoading: boolean;
   isError: boolean;
+  page: number;
 };
 
 interface StoriesFetchInitAction {

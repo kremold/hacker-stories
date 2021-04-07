@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { sortBy } from "lodash";
 import { StyledButton } from "./StyledButton";
-import { Story, Stories } from "./StoryTypes";
+import { Story } from "./StoryTypes";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import {
@@ -63,6 +63,7 @@ const SortButton = styled.button`
 //#endregion
 
 //#region types
+type Stories = Array<Story>;
 type ItemProps = {
   item: Story;
   onRemoveItem: (item: Story) => void;
@@ -150,7 +151,6 @@ export const List = ({ list, onRemoveItem }: ListProps) => {
       {sortedList.map((item) => (
         <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem} />
       ))}
-      ;
     </div>
   );
 };

@@ -60,7 +60,13 @@ describe("storiesReducer", () => {
     expect(newState).toStrictEqual(expectedState);
   });
   test("fetched of all stories", () => {
-    const action = { type: "STORIES_FETCH_SUCCESS", payload: stories };
+    const action = {
+      type: "STORIES_FETCH_SUCCESS",
+      payload: {
+        list: stories,
+        page: 0,
+      },
+    };
     const state = { data: stories, isLoading: false, isError: false };
 
     const newState = storiesReducer(state, action);
@@ -218,6 +224,7 @@ describe("App", () => {
     const reactPromise = Promise.resolve({
       data: {
         hits: stories,
+        page: 0,
       },
     });
 
@@ -233,6 +240,7 @@ describe("App", () => {
     const JavaScriptPromise = Promise.resolve({
       data: {
         hits: [anotherStory],
+        page: 0,
       },
     });
 
