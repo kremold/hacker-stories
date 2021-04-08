@@ -13,11 +13,12 @@ library.add(fab, faSearch);
 const StyledSearchFrom = styled.form`
   padding: 10px 0 20px 0;
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  justify-content: center;
 `;
 
 const StyledButtonLarge = styled(StyledButton)`
-  padding: 10px;
+  padding: 0.8em;
 `;
 //#endregion
 

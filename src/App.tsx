@@ -6,6 +6,7 @@ import { SearchForm } from "./SearchForm";
 import { TextParagraph } from "./TextParagraph";
 import { List, Item } from "./List";
 import { InputWithLabel } from "./InputWithLabel";
+import { StyledButton } from "./StyledButton";
 
 //#region styles
 
@@ -15,13 +16,19 @@ const StyledContainer = styled.div`
   background: limegreen;
   background: linear-gradient(to left, #b6fbff, limegreen);
   color: #171212;
-  font-family: "Wallpoet", cursive;
+  font-family: "Iceberg", cursive;
 `;
 
 const StyledHeadlinePrimary = styled.h1`
   font-size: 48px;
   font-weight: 300;
   letter-spacing: 2px;
+  text-align: center;
+`;
+
+const StyledMoreButton = styled(StyledButton)`
+  font-size: 24px;
+  font-family: "Iceberg", cursive;
 `;
 
 //#endregion
@@ -121,16 +128,18 @@ type LastSearchProps = {
 };
 const LastSearch = ({ lastSearches, onLastSearch }: LastSearchProps) => (
   <>
-    Recent Searches:
-    {lastSearches.map((searchTerm, index) => (
-      <button
-        key={searchTerm + index}
-        type="button"
-        onClick={() => onLastSearch(searchTerm)}
-      >
-        {searchTerm}
-      </button>
-    ))}
+    <TextParagraph>
+      Recent Searches:
+      {lastSearches.map((searchTerm, index) => (
+        <StyledButton
+          key={searchTerm + index}
+          type="button"
+          onClick={() => onLastSearch(searchTerm)}
+        >
+          {searchTerm}
+        </StyledButton>
+      ))}
+    </TextParagraph>
   </>
 );
 
@@ -229,9 +238,9 @@ const App = () => {
       {stories.isLoading ? (
         <p>Loading...</p>
       ) : (
-        <button type="button" onClick={handleMore}>
+        <StyledMoreButton type="button" onClick={handleMore}>
           More
-        </button>
+        </StyledMoreButton>
       )}
     </StyledContainer>
   );

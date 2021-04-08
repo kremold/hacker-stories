@@ -2,18 +2,18 @@
 
 exports[`App renders snapshot 1`] = `
 <div
-  class="sc-pFZIQ gLqNr"
+  class="sc-pFZIQ iTfmay"
 >
   <h1
-    class="sc-jrAGrp jCEuSj"
+    class="sc-jrAGrp iHIPLq"
   >
     My Hacker Stories.
   </h1>
   <form
-    class="sc-hKgILt cdXMqi"
+    class="sc-hKgILt kSkxOI"
   >
     <label
-      class="sc-gsTCUz gOPsll"
+      class="sc-gsTCUz kLijJl"
       for="search"
     >
       <strong>
@@ -22,14 +22,14 @@ exports[`App renders snapshot 1`] = `
     </label>
      
     <input
-      class="sc-dlfnbm bkWGVZ"
+      class="sc-dlfnbm gQSDPo"
       data-testid="submit"
       id="search"
       type="text"
       value="JavaScript"
     />
     <button
-      class="sc-bdfBwQ sc-eCssSg kQtNhM fTEYT"
+      class="sc-bdfBwQ sc-eCssSg gulLdC jfBZlM"
       type="submit"
     >
       <svg
@@ -49,7 +49,9 @@ exports[`App renders snapshot 1`] = `
       </svg>
     </button>
   </form>
-  Recent Searches:
+  <p>
+    Recent Searches:
+  </p>
   <p>
     <strong>
       Search Results:
@@ -57,65 +59,65 @@ exports[`App renders snapshot 1`] = `
   </p>
   <div>
     <div
-      class="sc-gKsewC hHvazR"
+      class="sc-gKsewC fLtFZt"
       style="font-weight: bold;"
     >
       <span
-        class="sc-iBPRYJ geCVjj"
+        class="sc-iBPRYJ dXrOhU"
         width="40%"
       >
         <button
-          class="sc-fubCfw gpBYaY"
+          class="sc-fubCfw hqmkmw"
           type="button"
         >
           Title:
         </button>
       </span>
       <span
-        class="sc-iBPRYJ geBiBU"
+        class="sc-iBPRYJ dXsBpb"
         width="30%"
       >
         <button
-          class="sc-fubCfw gpBYaY"
+          class="sc-fubCfw hqmkmw"
           type="button"
         >
           Author:
         </button>
       </span>
       <span
-        class="sc-iBPRYJ geBHCO"
+        class="sc-iBPRYJ dXscoh"
         width="10%"
       >
         <button
-          class="sc-fubCfw gpBYaY"
+          class="sc-fubCfw hqmkmw"
           type="button"
         >
           Comments:
         </button>
       </span>
       <span
-        class="sc-iBPRYJ geBHCO"
+        class="sc-iBPRYJ dXscoh"
         width="10%"
       >
         <button
-          class="sc-fubCfw gpBYaY"
+          class="sc-fubCfw hqmkmw"
           type="button"
         >
           Points:
         </button>
       </span>
       <span
-        class="sc-iBPRYJ geBHCO"
+        class="sc-iBPRYJ dXscoh"
         width="10%"
       >
         Remove:
       </span>
     </div>
     <div
-      class="sc-gKsewC hHvazR"
+      class="sc-gKsewC fLtFZt"
     >
       <span
-        class="sc-iBPRYJ geCVjj"
+        class="sc-iBPRYJ dXrOhU"
         width="40%"
       >
         <a
@@ -125,29 +127,29 @@ exports[`App renders snapshot 1`] = `
         </a>
       </span>
       <span
-        class="sc-iBPRYJ geBiBU"
+        class="sc-iBPRYJ dXsBpb"
         width="30%"
       >
         Jordan Walke
       </span>
       <span
-        class="sc-iBPRYJ geBHCO"
+        class="sc-iBPRYJ dXscoh"
         width="10%"
       >
         3
       </span>
       <span
-        class="sc-iBPRYJ geBHCO"
+        class="sc-iBPRYJ dXscoh"
         width="10%"
       >
         4
       </span>
       <span
-        class="sc-iBPRYJ geBHCO"
+        class="sc-iBPRYJ dXscoh"
         width="10%"
       >
         <button
-          class="sc-bdfBwQ sc-jSgupP kQtNhM fqYsgG"
+          class="sc-bdfBwQ sc-jSgupP gulLdC fqYsgG"
           data-testid="dismiss-button"
           type="button"
         >
@@ -170,10 +172,10 @@ exports[`App renders snapshot 1`] = `
       </span>
     </div>
     <div
-      class="sc-gKsewC hHvazR"
+      class="sc-gKsewC fLtFZt"
     >
       <span
-        class="sc-iBPRYJ geCVjj"
+        class="sc-iBPRYJ dXrOhU"
         width="40%"
       >
         <a
@@ -183,29 +185,29 @@ exports[`App renders snapshot 1`] = `
         </a>
       </span>
       <span
-        class="sc-iBPRYJ geBiBU"
+        class="sc-iBPRYJ dXsBpb"
         width="30%"
       >
         Dan Abramov, Andrew Clark
       </span>
       <span
-        class="sc-iBPRYJ geBHCO"
+        class="sc-iBPRYJ dXscoh"
         width="10%"
       >
         2
       </span>
       <span
-        class="sc-iBPRYJ geBHCO"
+        class="sc-iBPRYJ dXscoh"
         width="10%"
       >
         5
       </span>
       <span
-        class="sc-iBPRYJ geBHCO"
+        class="sc-iBPRYJ dXscoh"
         width="10%"
       >
         <button
-          class="sc-bdfBwQ sc-jSgupP kQtNhM fqYsgG"
+          class="sc-bdfBwQ sc-jSgupP gulLdC fqYsgG"
           data-testid="dismiss-button"
           type="button"
         >
@@ -229,6 +231,7 @@ exports[`App renders snapshot 1`] = `
     </div>
   </div>
   <button
+    class="sc-bdfBwQ sc-kEjbxe gulLdC hpCcNc"
     type="button"
   >
     More
@@ -238,10 +241,10 @@ exports[`App renders snapshot 1`] = `
 
 exports[`Item renders snapshot 1`] = `
 <div
-  class="sc-gKsewC hHvazR"
+  class="sc-gKsewC fLtFZt"
 >
   <span
-    class="sc-iBPRYJ geCVjj"
+    class="sc-iBPRYJ dXrOhU"
     width="40%"
   >
     <a
@@ -251,29 +254,29 @@ exports[`Item renders snapshot 1`] = `
     </a>
   </span>
   <span
-    class="sc-iBPRYJ geBiBU"
+    class="sc-iBPRYJ dXsBpb"
     width="30%"
   >
     Jordan Walke
   </span>
   <span
-    class="sc-iBPRYJ geBHCO"
+    class="sc-iBPRYJ dXscoh"
     width="10%"
   >
     3
   </span>
   <span
-    class="sc-iBPRYJ geBHCO"
+    class="sc-iBPRYJ dXscoh"
     width="10%"
   >
     4
   </span>
   <span
-    class="sc-iBPRYJ geBHCO"
+    class="sc-iBPRYJ dXscoh"
     width="10%"
   >
     <button
-      class="sc-bdfBwQ sc-jSgupP kQtNhM fqYsgG"
+      class="sc-bdfBwQ sc-jSgupP gulLdC fqYsgG"
       data-testid="dismiss-button"
       type="button"
     >
@@ -299,10 +302,10 @@ exports[`Item renders snapshot 1`] = `
 
 exports[`SearchForm renders snapshot 1`] = `
 <form
-  class="sc-hKgILt cdXMqi"
+  class="sc-hKgILt kSkxOI"
 >
   <label
-    class="sc-gsTCUz gOPsll"
+    class="sc-gsTCUz kLijJl"
     for="search"
   >
     <strong>
@@ -311,14 +314,14 @@ exports[`SearchForm renders snapshot 1`] = `
   </label>
    
   <input
-    class="sc-dlfnbm bkWGVZ"
+    class="sc-dlfnbm gQSDPo"
     data-testid="submit"
     id="search"
     type="text"
     value="React"
   />
   <button
-    class="sc-bdfBwQ sc-eCssSg kQtNhM fTEYT"
+    class="sc-bdfBwQ sc-eCssSg gulLdC jfBZlM"
     type="submit"
   >
     <svg

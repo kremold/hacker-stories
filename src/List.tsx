@@ -23,6 +23,9 @@ const StyledItem = styled.div`
   display: flex;
   align-items: center;
   padding-bottom: 5px;
+  span:first-child {
+    text-align: left;
+  }
 `;
 
 const StyledColumn = styled.span<{ width: string }>`
@@ -31,7 +34,7 @@ const StyledColumn = styled.span<{ width: string }>`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-
+  text-align: center;
   a {
     color: inherit;
   }
@@ -41,10 +44,13 @@ const StyledColumn = styled.span<{ width: string }>`
 
 const SortButton = styled.button`
   cursor: pointer;
-  font-family: "Wallpoet", cursive;
+  font-family: "Iceberg", cursive;
   box-shadow: 0px 0px 0px transparent;
   border: 0px solid transparent;
   text-shadow: 0px 0px 0px transparent;
+  border-radius: 8px;
+  width: 100%;
+
   &:focus {
     outline: none;
   }
